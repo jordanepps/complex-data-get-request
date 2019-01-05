@@ -30,7 +30,7 @@ function getParkResults(state, limit) {
     console.log(url);
     fetch(url)
         .then(res => res.json())
-        .then(resJSON => loadParkResults(resJSON, limit))
+        .then(loadParkResults)
         .catch(err => console.log(err))
 
 }
