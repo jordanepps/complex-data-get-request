@@ -10,7 +10,6 @@ function createParkDiv(data) {
 }
 
 function loadParkResults(data) {
-    console.log(data);
     $('#js-search-results').html(data.data.map(createParkDiv));
 }
 
@@ -27,7 +26,6 @@ function getParkResults(state, limit) {
     }
     const queryString = formatQueryParams(params);
     const url = `${searchURL}?${queryString}`;
-    console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(loadParkResults)
