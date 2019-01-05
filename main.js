@@ -5,8 +5,26 @@ function createParkDiv(data) {
     return `<div class="park">
                 <h2>${data.fullName}</h2>
                 <p>${data.description}</p>
+                ${loadAddress(data.addresses[1])}
                 <a href="${data.url}" target="_blank">More Info</a>
             </div>`
+}
+
+function loadAddress(address) {
+    if (address) {
+        const line1 = address.line1 ? `${address.line1}<br>` : '';
+        const line2 = address.line2 ? `${address.line2}<br>` : '';
+        const line3 = address.line3 ? `${address.line3}<br>` : '';
+        const cityState = `${address.city}, ${address.stateCode} ${address.postalCode}`;
+        return `<address>
+                    ${line1}
+                    ${line2}
+                    ${line3}
+                    ${cityState}
+                </address>`;
+    }
+    return '';
+
 }
 
 function loadParkResults(data) {
@@ -23,6 +41,7 @@ function getParkResults(state, limit) {
         limit,
         stateCode: state,
         api_key: apiKey,
+        fields: 'addresses'
     }
     const queryString = formatQueryParams(params);
     const url = `${searchURL}?${queryString}`;
